@@ -1,0 +1,33 @@
+.navbar {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #000000;
+  padding: 2.5rem ;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); 
+}
+
+.navbar a {
+  color: #fff; 
+  margin: 0 9rem; 
+  text-decoration: none; 
+  font-size: 0.9rem;
+  line-height: 2.5rem; 
+  text-transform: uppercase; 
+  position: relative; 
+  transition: color 0.3s; 
+}
+
+.navbar a:hover::after {
+  content: ""; 
+  position: absolute;
+  left: 0;
+  bottom: -2px;
+  width: 100%; 
+  height: 2px;
+  background-color: #8ff0f0; 
+}
+
+.navbar a:hover {
+  color: #8ff0f0;
+}
