@@ -1,74 +1,63 @@
 import React, { useState, useEffect } from "react";
-import "./game.css";
-import Review from "./Review";
-import { Link } from "react-router-dom";
+import Review from "../games/Review";
 
-function Game() {
-  const [cardData, setCardData] = useState([]);
 
+function Offer() {
+  const [offers, setOffers] = useState([]);
   useEffect(() => {
-    fetch("http://127.0.0.1:8000/games")
+    fetch("http://127.0.0.1:8000/offer")
       .then((response) => response.json())
       .then((data) => {
-        setCardData(data.games);
+        setOffers(data.offer);
       })
       .catch((error) => {
         console.error("Error fetching data:", error);
       });
   }, []);
 
-  function handlePurchase(card) {
-    alert(`Purchased ${card.title} Enjoy.`);
-  }
+  const handlePurchase = (offer) => {
+    console.log("Purchase:", offer.title);
+  };
 
   function handleRatingChange(index, newRating) {
     const updatedCardData = [...cardData];
     updatedCardData[index].rating = newRating;
     setCardData(updatedCardData);
   }
-
   return (
-    <div>
-      <Link to="/home" className="btn btn-back btn-light">
-        Back
-      </Link>
+    <div className="body">
       <div className="cards-container">
-        {cardData.map((card, index) => (
+        {offers.map((offer, index) => (
           <div className="card" key={index}>
             <img
-              src={card.image_url}
+              src={offer.image_url}
               className="card-img-top"
               alt={`Card image ${index + 1}`}
             />
             <div className="card-body">
-              <h5 className="heading">{card.title}</h5>
+              <h5 className="card-title">{offer.title}</h5>
               <div className="card-details">
-                <p>Category: {card.category}</p>
-                <p>Price: {card.price}</p>
-                <p>Rating: {card.rating}</p>
-                <p>{card.release_date}</p>
+                <p>Category: {offer.category}</p>
+                <p>Price: {offer.current_price}</p>
+                <p>Rating: {offer.rating}</p>
+                <p>Release Date: {offer.release_date}</p>
               </div>
               <button
-                onClick={() => handlePurchase(card)}
+                onClick={() => handlePurchase(offer)}
                 className="btn btn-success"
               >
                 Buy Now
               </button>
               <Review
-                rating={card.rating}
+                rating={offer.rating}
                 setRating={(newRating) => handleRatingChange(index, newRating)}
               />
             </div>
           </div>
         ))}
       </div>
-      <div className="next-page">
-        <Link to="/offer" className="btn btn-back btn-light">
-          Next Page
-        </Link>
-      </div>
     </div>
   );
 }
 
-export default Game;
+export default Offer;

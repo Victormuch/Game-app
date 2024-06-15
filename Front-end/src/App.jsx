@@ -4,7 +4,7 @@ import Login from "./components/Login";
 import Signup from "./components/Signup";
 import Home from "./pages/home/Home";
 import Game from "./pages/games/Game";
-import Offer from "./pages/add/Offer";
+import Offer from "./pages/offer/Offer";
 import Upcoming from "./pages/upcoming/Upcoming";
 
 
