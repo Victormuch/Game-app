@@ -118,17 +118,3 @@ upcoming8 = Upcoming(
     release_date="2024-03-31"
 )
 upcoming8.save()
-
-upcoming9 = Upcoming(
-    image_url="https://example.com/upcoming9.jpg",
-    title="Gothic Remake",
-    release_date="2023-11-30"
-)
-upcoming9.save()
-
-upcoming10 = Upcoming(
-    image_url="https://example.com/upcoming10.jpg",
-    title="Dragon Age 4",
-    release_date="2024-02-29"
-)
-upcoming10.save()

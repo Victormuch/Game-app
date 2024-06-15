@@ -1,14 +1,23 @@
 import React, { useState, useEffect } from "react";
 import Review from "../games/Review";
 
-
 function Offer() {
   const [offers, setOffers] = useState([]);
+
   useEffect(() => {
     fetch("http://127.0.0.1:8000/offer")
-      .then((response) => response.json())
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+        return response.json();
+      })
       .then((data) => {
-        setOffers(data.offer);
+        if (Array.isArray(data.offer)) {
+          setOffers(data.offer); // Ensure data.offer is an array
+        } else {
+          throw new Error(`Data.offer is not an array`);
+        }
       })
       .catch((error) => {
         console.error("Error fetching data:", error);
@@ -17,13 +26,8 @@ function Offer() {
 
   const handlePurchase = (offer) => {
     console.log("Purchase:", offer.title);
+  
   };
-
-  function handleRatingChange(index, newRating) {
-    const updatedCardData = [...cardData];
-    updatedCardData[index].rating = newRating;
-    setCardData(updatedCardData);
-  }
   return (
     <div className="body">
       <div className="cards-container">
@@ -38,7 +42,8 @@ function Offer() {
               <h5 className="card-title">{offer.title}</h5>
               <div className="card-details">
                 <p>Category: {offer.category}</p>
-                <p>Price: {offer.current_price}</p>
+                <p>Initial Price:{offer.initial_price}</p>
+                <p>Current price: {offer.current_price}</p>
                 <p>Rating: {offer.rating}</p>
                 <p>Release Date: {offer.release_date}</p>
               </div>
@@ -48,10 +53,6 @@ function Offer() {
               >
                 Buy Now
               </button>
-              <Review
-                rating={offer.rating}
-                setRating={(newRating) => handleRatingChange(index, newRating)}
-              />
             </div>
           </div>
         ))}

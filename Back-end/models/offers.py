@@ -175,24 +175,3 @@ offer8 = Offers(
 )
 offer8.save()
 
-offer9 = Offers(
-    image_url="https://wallpaperaccess.com/full/5678901.jpg",
-    title="Mortal Kombat 11",
-    category="Fighting",
-    initial_price="Ksh 5,900",
-    current_price="Ksh 3,900",
-    rating=4,
-    release_date="2019-04-23"
-)
-offer9.save()
-
-offer10 = Offers(
-    image_url="https://wallpaperaccess.com/full/6789012.jpg",
-    title="Street Fighter V",
-    category="Fighting",
-    initial_price="Ksh 6,000",
-    current_price="Ksh 4,000",
-    rating=4,
-    release_date="2016-02-16"
-)
-offer10.save()
