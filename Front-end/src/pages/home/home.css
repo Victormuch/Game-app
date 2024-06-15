@@ -1,0 +1,141 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700&display=swap");
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Roboto', sans-serif;
+}
+body {
+  background: #0e0e1a;
+
+}
+
+.home-container {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.background-image {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: -1; 
+}
+
+.home {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  background: url('./images/this.jpg') no-repeat center center/cover;
+  text-align: left;
+  padding: 1rem 5%;
+}
+
+.home .content {
+  max-width: 40rem;
+}
+
+.home .content h2 {
+  font-size: 3rem; 
+  color: #8ff0f0;
+  text-transform: uppercase;
+  margin: 0;
+}
+
+.home .content p {
+  font-size: 1.2rem;
+  font-weight: 300;
+  line-height: 1.5;
+  padding: 0.5rem 0;
+  color: #fdf0f0;
+}
+
+.home .content button {
+  background-color: #7fc8c8; 
+  color: #0e0e1a;
+  padding: 0.8rem 0.8rem;
+  font-size: 1.2rem;
+  border: none; 
+  border-radius: 0.5rem; 
+  cursor: pointer;
+  transition: background-color 0.3s ease; 
+}
+
+.home .content button:hover {
+  background-color: #437474;
+}
+
+html::-webkit-scrollbar {
+  width: 0.8rem;
+}
+html::-webkit-scrollbar-track {
+  background: black;
+}
+html::-webkit-scrollbar-thumb {
+  background: #464646;
+  border-radius: 5rem;
+}
+.cta {
+  position: relative;
+  text-decoration: none;
+  margin: auto;
+  padding: 12px 18px;
+  transition: all 0.2s ease;
+  border: none;
+  background: none;
+  cursor: pointer;
+}
+
+.cta:before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: block;
+  border-radius: 50px;
+  background: #b1dae7;
+  width: 45px;
+  height: 45px;
+  transition: all 0.3s ease;
+}
+
+.cta span {
+  position: relative;
+  font-family: "Ubuntu", sans-serif;
+  font-size: 18px;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  color: #234567;
+}
+
+.cta svg {
+  position: relative;
+  top: 0;
+  margin-left: 10px;
+  fill: none;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke: #234567;
+  stroke-width: 2;
+  transform: translateX(-5px);
+  transition: all 0.3s ease;
+}
+
+.cta:hover:before {
+  width: 100%;
+  background: #b1dae7;
+}
+
+.cta:hover svg {
+  transform: translateX(0);
+}
+
+.cta:active {
+  transform: scale(0.95);
+}
