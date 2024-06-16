@@ -149,7 +149,6 @@ async def startup_event():
                 "rating": 4,
                 "releaseDate": "Release Date: 2020-11-10"
             },
-       
         ]
 
         for card in card_data:

@@ -1,22 +1,17 @@
 import React, { useState, useEffect } from "react";
-import Review from "../games/Review";
+import { Link } from "react-router-dom";
 
 function Offer() {
-  const [offers, setOffers] = useState([]);
+  const [offers1, setOffers1] = useState([]);
 
   useEffect(() => {
     fetch("http://127.0.0.1:8000/offer")
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error(`HTTP error! Status: ${response.status}`);
-        }
-        return response.json();
-      })
+      .then((response) => response.json())
       .then((data) => {
-        if (Array.isArray(data.offer)) {
-          setOffers(data.offer); // Ensure data.offer is an array
+        if (data.offers) {
+          setOffers1(data.offers);
         } else {
-          throw new Error(`Data.offer is not an array`);
+          console.error("Unexpected data structure:", data);
         }
       })
       .catch((error) => {
@@ -24,31 +19,34 @@ function Offer() {
       });
   }, []);
 
-  const handlePurchase = (offer) => {
-    console.log("Purchase:", offer.title);
-  
+  const handlePurchase = (offer_data) => {
+    alert(`Purchase: ${offer_data.title}`);
   };
+
   return (
-    <div className="body">
+    <div>
+      <Link to="/games" className="btn btn-back btn-light">
+        Back
+      </Link>
       <div className="cards-container">
-        {offers.map((offer, index) => (
-          <div className="card" key={index}>
+        {offers1.map((card, index) => (
+          <div className="card" key={card.id}>
             <img
-              src={offer.image_url}
+              src={card.image_url}
               className="card-img-top"
               alt={`Card image ${index + 1}`}
             />
             <div className="card-body">
-              <h5 className="card-title">{offer.title}</h5>
+              <h5 className="heading">{card.title}</h5>
               <div className="card-details">
-                <p>Category: {offer.category}</p>
-                <p>Initial Price:{offer.initial_price}</p>
-                <p>Current price: {offer.current_price}</p>
-                <p>Rating: {offer.rating}</p>
-                <p>Release Date: {offer.release_date}</p>
+                <p>Category: {card.category}</p>
+                <p>Initial price: {card.initial_price}</p>
+                <p>Final price: {card.current_price}</p>
+                <p>Rating: {card.rating}</p>
+                <p>{card.release_date}</p>
               </div>
               <button
-                onClick={() => handlePurchase(offer)}
+                onClick={() => handlePurchase(card)}
                 className="btn btn-success"
               >
                 Buy Now

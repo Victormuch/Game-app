@@ -1,8 +1,9 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from games import Games
 from models.offers import Offers
 from models.upcoming import Upcoming
+from games import Games
+
 app = FastAPI()
 
 app.add_middleware(
@@ -19,9 +20,9 @@ async def get_games():
     return {"games": [game.to_dict() for game in games]}
 
 @app.get("/offer")
-async def get_upcoming():
-    upcoming = Upcoming.get_all()
-    return {"offer": [up.to_dict() for up in upcoming]}
+async def get_offers():
+    offers = Offers.get_all()
+    return {"offers": [offer.to_dict() for offer in offers]}
 
 @app.get("/upcoming")
 async def get_upcoming_games():

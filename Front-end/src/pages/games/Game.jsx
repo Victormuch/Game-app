@@ -18,7 +18,7 @@ function Game() {
   }, []);
 
   function handlePurchase(card) {
-    alert(`Purchased ${card.title} Enjoy.`);
+    alert(`Purchased ${card.title}. Enjoy.`);
   }
 
   function handleRatingChange(index, newRating) {
@@ -55,6 +55,7 @@ function Game() {
                 Buy Now
               </button>
               <Review
+                key={`review-${index}`}
                 rating={card.rating}
                 setRating={(newRating) => handleRatingChange(index, newRating)}
               />
