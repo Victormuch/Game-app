@@ -1,8 +1,8 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from models.offers import Offers
-from models.upcoming import Upcoming
-from games import Games
+from models.game1 import Games
+from models.coming import Upcoming
+from models.cut import Offer
 
 app = FastAPI()
 
@@ -14,17 +14,18 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-@app.get("/games")
-async def get_games():
-    games = Games.get_all()
-    return {"games": [game.to_dict() for game in games]}
+
+@app.get("/games1")
+async def get_cards():
+    cards= Games.get_all()
+    return{"games1":[card.to_dict() for card in cards]}
+
+@app.get("/coming1")
+async def get_upcoming():
+    cards= Upcoming.get_all()
+    return{"coming1":[card.to_dict() for card in cards]}
 
 @app.get("/offer")
-async def get_offers():
-    offers = Offers.get_all()
-    return {"offers": [offer.to_dict() for offer in offers]}
-
-@app.get("/upcoming")
-async def get_upcoming_games():
-    upcoming_games = Upcoming.get_all()
-    return {"upcoming_games": [game.to_dict() for game in upcoming_games]}
+async def get_offer():
+    offers = Offer.get_all()
+    return {"offer": [offer.__dict__ for offer in offers]}

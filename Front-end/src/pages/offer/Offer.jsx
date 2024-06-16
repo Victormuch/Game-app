@@ -4,20 +4,22 @@ import { Link } from "react-router-dom";
 function Offer() {
   const [offers1, setOffers1] = useState([]);
 
-  useEffect(() => {
-    fetch("http://127.0.0.1:8000/offer")
-      .then((response) => response.json())
-      .then((data) => {
-        if (data.offers) {
-          setOffers1(data.offers);
-        } else {
-          console.error("Unexpected data structure:", data);
-        }
-      })
-      .catch((error) => {
-        console.error("Error fetching data:", error);
-      });
-  }, []);
+ useEffect(() => {
+   fetch("http://127.0.0.1:8000/offer")
+     .then((response) => {
+       if (!response.ok) {
+         throw new Error(`HTTP error! Status: ${response.status}`);
+       }
+       return response.json();
+     })
+     .then((data) => {
+       console.log("Fetched data:", data);
+       setOffers1(data.offer);
+     })
+     .catch((error) => {
+       console.error("Error fetching data:", error);
+     });
+ }, []);
 
   const handlePurchase = (offer_data) => {
     alert(`Purchase: ${offer_data.title}`);
@@ -25,7 +27,7 @@ function Offer() {
 
   return (
     <div>
-      <Link to="/games" className="btn btn-back btn-light">
+      <Link to="/game" className="btn btn-back btn-light">
         Back
       </Link>
       <div className="cards-container">
@@ -54,6 +56,11 @@ function Offer() {
             </div>
           </div>
         ))}
+      </div>
+      <div className="next-page">
+        <Link to="/upcoming" className="btn btn-back btn-light">
+          Next Page
+        </Link>
       </div>
     </div>
   );

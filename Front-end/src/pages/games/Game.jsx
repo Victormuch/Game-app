@@ -7,10 +7,16 @@ function Game() {
   const [cardData, setCardData] = useState([]);
 
   useEffect(() => {
-    fetch("http://127.0.0.1:8000/games")
-      .then((response) => response.json())
+    fetch("http://127.0.0.1:8000/games1")
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+        return response.json();
+      })
       .then((data) => {
-        setCardData(data.games);
+        console.log("Fetched data:", data);
+        setCardData(data.games1); 
       })
       .catch((error) => {
         console.error("Error fetching data:", error);
@@ -26,7 +32,6 @@ function Game() {
     updatedCardData[index].rating = newRating;
     setCardData(updatedCardData);
   }
-
   return (
     <div>
       <Link to="/home" className="btn btn-back btn-light">
@@ -55,7 +60,6 @@ function Game() {
                 Buy Now
               </button>
               <Review
-                key={`review-${index}`}
                 rating={card.rating}
                 setRating={(newRating) => handleRatingChange(index, newRating)}
               />
