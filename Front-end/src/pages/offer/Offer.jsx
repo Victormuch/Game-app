@@ -22,7 +22,7 @@ function Offer() {
  }, []);
 
   const handlePurchase = (offer_data) => {
-    alert(`Purchase: ${offer_data.title}`);
+    alert(`Purchased: ${offer_data.title}`);
   };
 
   return (
@@ -43,7 +43,7 @@ function Offer() {
               <div className="card-details">
                 <p>Category: {card.category}</p>
                 <p>Initial price: {card.initial_price}</p>
-                <p>Final price: {card.current_price}</p>
+                <p>Current: {card.current_price}</p>
                 <p>Rating: {card.rating}</p>
                 <p>{card.release_date}</p>
               </div>
